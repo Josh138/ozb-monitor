@@ -24,8 +24,7 @@ def send_notification(title, message, url):
                 "Tags": "moneybag,fire",
                 "Click": url,
             },
-            data=message.encode("utf-8"),
-            timeout=10,
+            data=message.encode("utf-8", errors="ignore"),
             timeout=10,
         )
         print(f"[ntfy] Sent notification, status={r.status_code}: {title}")
