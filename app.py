@@ -24,7 +24,7 @@ def send_notification(title, message, url):
                 "Tags": "moneybag,fire",
                 "Click": url,
             },
-            data=message.encode("utf-8", errors="ignore"),
+            data=message.encode("ascii", errors="ignore"),
             timeout=10,
         )
         print(f"[ntfy] Sent notification, status={r.status_code}: {title}")
@@ -108,13 +108,13 @@ def monitor_loop():
                 if d["guid"] not in seen_guids:
                     seen_guids.add(d["guid"])
                     new_found.append(d)
-                    print(f"[monitor] 🔥 NEW DEAL FOUND: {d['title']}")
+                    print(f"[monitor] NEW DEAL FOUND: {d['title']}")
 
             if new_found:
                 status["new_deals"] += len(new_found)
                 for d in new_found:
                     send_notification(
-                        title="New OzBargain Deal!",
+                        title="New OzBargain Deal",
                         message=d["title"],
                         url=d["link"],
                     )
