@@ -26,6 +26,7 @@ def send_notification(title, message, url):
             },
             data=message.encode("utf-8"),
             timeout=10,
+            timeout=10,
         )
         print(f"[ntfy] Sent notification, status={r.status_code}: {title}")
     except Exception as e:
@@ -114,7 +115,7 @@ def monitor_loop():
                 status["new_deals"] += len(new_found)
                 for d in new_found:
                     send_notification(
-                        title="🔥 New OzBargain Deal!",
+                        title="New OzBargain Deal!",
                         message=d["title"],
                         url=d["link"],
                     )
